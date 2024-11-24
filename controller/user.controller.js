@@ -4,7 +4,7 @@ import AppError from "../utils/error.utils.js";
 
 export const AddUser = async (req, res, next) => {
     try {
-        const { name, email } = req.body;
+        const { name, email, bio, photo, skills } = req.body;
 
         if (!name || !email) {
             return next(new AppError("Name and email are required.", 400));
@@ -14,16 +14,19 @@ export const AddUser = async (req, res, next) => {
         const user = await User.create({
             name,
             email,
+            bio,
+            photo,
+            skills,
         });
 
         if (!user) {
             return next(new AppError("Error creating user.", 500));
         }
 
-       
+        // Create Permission
         const permission = await Permission.create({
             userId: user._id,
-            userName : user.name
+            userName: user.name,
         });
 
         if (!permission) {
@@ -63,34 +66,34 @@ export const GetUserById = async (req, res, next) => {
         return next(new AppError(error.message, 500));
     }
 };
+
 export const EditUser = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { name, email, role, status, permissions } = req.body;
+        const { name, email, role, status, bio, photo, skills, permissions } = req.body;
 
-        // Find the user to ensure it exists
         const user = await User.findById(id);
 
         if (!user) {
             return next(new AppError("User not found.", 404));
         }
 
-        // Update only the provided fields in the user document
         if (name) user.name = name;
         if (email) user.email = email;
         if (role) user.role = role;
         if (status) user.status = status;
+        if (bio) user.bio = bio;
+        if (photo) user.photo = photo;
+        if (skills) user.skills = skills;
 
         await user.save();
 
-        // Fetch existing permission record
         const permission = await Permission.findOne({ userId: id });
 
         if (!permission) {
             return next(new AppError("Permissions for this user not found.", 404));
         }
 
-        // Update roles only if provided
         if (role) {
             permission.roles = {
                 user: role === "user",
@@ -99,11 +102,10 @@ export const EditUser = async (req, res, next) => {
             };
         }
 
-        // Update permissions if provided
         if (permissions) {
             permission.permissions = {
                 ...permission.permissions,
-                ...permissions, // Merge provided permissions with existing ones
+                ...permissions, 
             };
         }
 
@@ -137,6 +139,7 @@ export const DeleteUser = async (req, res, next) => {
         return next(new AppError(error.message, 500));
     }
 };
+
 export const GetAllUsers = async (req, res, next) => {
     try {
         const users = await User.find();
@@ -155,6 +158,7 @@ export const GetAllUsers = async (req, res, next) => {
         return next(new AppError(error.message, 500));
     }
 };
+
 export const EditUserRole = async (req, res, next) => {
     try {
         const { id } = req.params; // User ID
@@ -164,7 +168,6 @@ export const EditUserRole = async (req, res, next) => {
             return next(new AppError("Invalid role. Allowed values: user, admin, subadmin.", 400));
         }
 
-        // Update user role
         const user = await User.findByIdAndUpdate(
             id,
             { role },
@@ -175,7 +178,6 @@ export const EditUserRole = async (req, res, next) => {
             return next(new AppError("User not found.", 404));
         }
 
-        // Update corresponding permission roles
         const permission = await Permission.findOneAndUpdate(
             { userId: id },
             {
@@ -201,21 +203,21 @@ export const EditUserRole = async (req, res, next) => {
         return next(new AppError(error.message, 500));
     }
 };
+
 export const EditUserPermission = async (req, res, next) => {
     try {
-        const { id } = req.params; // User ID
-        const { permissions } = req.body; // New permissions
+        const { id } = req.params; 
+        const { permissions } = req.body; 
 
         if (!permissions || typeof permissions !== "object") {
             return next(new AppError("Invalid permissions data.", 400));
         }
 
-        // Update permissions
         const permission = await Permission.findOneAndUpdate(
             { userId: id },
             {
                 permissions: {
-                    ...permissions, // Merge new permissions with existing ones
+                    ...permissions, 
                 },
             },
             { new: true }

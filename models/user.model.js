@@ -13,7 +13,7 @@ const userSchema = new Schema(
             unique: true,
             trim: true,
             lowercase: true,
-            match: [/\S+@\S+\.\S+/, "Email is invalid"], // Email validation regex
+            match: [/\S+@\S+\.\S+/, "Email is invalid"], 
         },
         role: {
             type: String,
@@ -24,6 +24,23 @@ const userSchema = new Schema(
             type: String,
             enum: ["active", "inactive"],
             default: "active",
+        },
+        bio: {
+            type: String,
+            trim: true,
+            maxlength: [500, "Bio cannot exceed 500 characters"], 
+        },
+        photo: {
+            type: String, 
+            trim: true,
+        },
+        skills: {
+            type: [String], 
+            default: [], 
+            validate: {
+                validator: (skills) => skills.every((skill) => typeof skill === "string"),
+                message: "All skills must be strings",
+            },
         },
     },
     { timestamps: true }
