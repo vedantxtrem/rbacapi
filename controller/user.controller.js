@@ -139,22 +139,28 @@ export const DeleteUser = async (req, res, next) => {
 
 export const GetAllUsers = async (req, res, next) => {
     try {
-        const users = await User.find();
-        const permissions = await Permission.find();
-
-        const result = users.map(user => ({
-            user,
-            permission: permissions.find(perm => String(perm.userId) === String(user._id)),
-        }));
-
-        res.status(200).json({
-            message: "Users fetched successfully",
-            data: result,
-        });
+      const users = await User.find();
+      const permissions = await Permission.find();
+  
+      const result = users.map((user) => {
+        const userPermissions = permissions.find(
+          (perm) => String(perm.userId) === String(user._id)
+        );
+  
+        return {
+          user,
+          permission: userPermissions || null, 
+        };
+      });
+  
+      res.status(200).json({
+        message: "Users fetched successfully",
+        data: result,
+      });
     } catch (error) {
-        return next(new AppError(error.message, 500));
+      return next(new AppError(error.message, 500));
     }
-};
+  };
 
 export const EditUserRole = async (req, res, next) => {
     try {
