@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // app.use(cors({}));
 app.use(cors({
-  origin: ["http://localhost:5173","*","https://rbac-frontend-kappa.vercel.app/"],
+  origin: [process.env.FRONTEND_URL],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
 }));
