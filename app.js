@@ -14,10 +14,15 @@ app.use(express.urlencoded({ extended: true }));
 
 // app.use(cors({}));
 app.use(cors({
-  origin: [process.env.FRONTEND_URL],
+  origin: "https://rbac-frontend-kappa.vercel.app/",
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
 }));
+// app.use(cors({
+//   origin: ["http://localhost:5173","*"],
+//   credentials: true,
+//   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
+// }));
 
 app.use(bodyParser.json({ limit: "10mb" }));
 
