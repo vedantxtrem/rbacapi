@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // app.use(cors({}));
 app.use(cors({
-  origin: "https://rbac-frontend-kappa.vercel.app",
+  origin: "https://vrv-rbac.vercel.app",
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
 }));
@@ -30,6 +30,10 @@ app.use("/api/v1/user",userRouter);
 
 app.get('/ping', (_req, res) => {
     res.send('Pong');
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 });
 
 export default app;
