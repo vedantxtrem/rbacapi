@@ -239,26 +239,5 @@ export const EditUserPermission = async (req, res, next) => {
     }
 };
 
-export const uploadImage = async (req, res, next) => {
-    try {
-      const { image } = req.body; // Expect the image to be sent in the `image` field
-  
-      if (!image) {
-        return next(new AppError("No image provided", 400)); // Optional error handler
-      }
-  
-      // Upload the image to Cloudinary
-      const result = await cloudinary.uploader.upload(image, {
-        folder: "rbac", // Optional: Specify a folder in Cloudinary
-      });
-  
-      res.status(200).json({
-        message: "Image uploaded successfully",
-        url: result.secure_url, // Cloudinary URL of the uploaded image
-      });
-    } catch (error) {
-      console.error("Cloudinary upload error:", error);
-      return next(new AppError("Image upload failed", 500)); // Optional error handler
-    }
-};
+
   

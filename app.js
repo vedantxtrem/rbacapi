@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import userRouter from './routes/user.routes.js';
+import uploadRoutes from './routes/upload.routes.js';
 import bodyParser from 'body-parser';
 
 dotenv.config({
@@ -10,7 +11,8 @@ dotenv.config({
 
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: '10mb' })); 
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 // app.use(cors({}));
 app.use(cors({
@@ -24,9 +26,10 @@ app.use(cors({
 //   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
 // }));
 
-app.use(bodyParser.json({ limit: "10mb" }));
+
 
 app.use("/api/v1/user",userRouter);
+app.use('/api/v1/upload', uploadRoutes);
 
 app.get('/ping', (_req, res) => {
     res.send('Pong');
