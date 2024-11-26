@@ -29,35 +29,30 @@ This repository contains the backend code for a **Role-Based Access Control (RBA
 
 ---
 
-## **Installation**
+## Setup Instructions
 
-### **1. Clone the Repository**
-
-Run the following command to install all required dependencies:
-
-bash
-npm install
-
-
+1. Clone the Project
+```
+    [git clone https://github.com/vedantxtrem/LMS-F.git](https://github.com/vedantxtrem/rbacapi.git) 
+```
 2. Setup Environment Variables
+```
+    MONGODB_URI=mongodb+srv://<username>:<password>@(link unavailable)
 
-Create a .env file in the root directory and add the following environment variables:
+    CLOUDINARY_NAME=your-cloudinary-name
 
-PORT=5000
-MONGODB_URI=mongodb+srv://<username>:<password>@(link unavailable)
-CLOUDINARY_NAME=your-cloudinary-name
-CAPIKEY=your-cloudinary-api-key
-CSECRET=your-cloudinary-api-secret
+    CAPIKEY=your-cloudinary-api-key
 
-
-3. Run the Server
-
-Start the server using the following command:
-
-bash
-npm start
-
-The server will start at http://localhost:5000.
+    CSECRET=your-cloudinary-api-secret
+```
+3. Install dependecies 
+```
+    npm i 
+```
+4. Run the server
+```
+    npm run dev
+```
 
 API Endpoints
 
@@ -94,7 +89,7 @@ Folder Structure
 
 
 
-rbac-backend/
+rbac-backend /
 ├── models/
 │   ├── user.model.js
 │   ├── permission.model.js
@@ -111,41 +106,26 @@ rbac-backend/
 ├── package.json
 
 
-Environment Variables
+
+### **Deployment**
+**It Deploy in render . Free Tier (Note : It will take 1-2 min on Starting the server on first time )**
+
+## **Contributors**
+### Vedant Sahu
+#### ReactJS, Tailwindcss, NodeJS , NextJS , Express MonogoDB , TypeScript , JavaScript
+<a href="https://in.linkedin.com/in/vedant-sahu-b4298324a" target="_blank">
+  <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn">
+</a>
+<a href="https://github.com/vedantxtrem" target="_blank">
+  <img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+</a>
+<a href="https://www.instagram.com/vedant_xtrem_99/" target="_blank">
+  <img src="https://img.shields.io/badge/Instagram-%23E4405F.svg?style=for-the-badge&logo=Instagram&logoColor=white" alt="Instagram">
+</a>
+
+<a href="mailto:vedant@ssipmt.com" target="_blank">
+  <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail">
+</a>
 
 
-The application uses a .env file to manage sensitive configurations. Below are the required variables:
-
-- PORT: Port number for the server (e.g., 5000).
-- MONGODB_URI: MongoDB connection string.
-- CLOUDINARY_NAME: Your Cloudinary account name.
-- CAPIKEY: Cloudinary API key.
-- CSECRET: Cloudinary API secret.
-
-Deployment
-
-
-Local Deployment
-
-Follow the installation steps above. Run the server using:
-
-bash
-npm start
-
-Access the server at http://localhost:5000.
-
-Production Deployment
-
-Use platforms like Heroku, AWS, or Vercel. Ensure environment variables are configured properly in the hosting platform. Deploy your codebase.
-
-License
-
-
-This project is licensed under the MIT License. Feel free to use, modify, and distribute this code as per the license terms.
-
-Contributors
-
-
-Your Name: GitHub Profile
-
-For questions or feedback, feel free to contact me!
+**For questions or feedback, feel free to contact me!**
