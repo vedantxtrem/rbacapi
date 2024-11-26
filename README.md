@@ -85,25 +85,6 @@ Image Upload
 | --- | --- | --- |
 | POST | /api/v1/upload/generate-presigned-url | Generate Cloudinary presigned URL. |
 
-Folder Structure
-
-
-
-rbac-backend /
-├── models/
-│   ├── user.model.js
-│   ├── permission.model.js
-├── routes/
-│   ├── user.routes.js
-│   ├── upload.routes.js
-├── controller/
-│   ├── user.controller.js
-├── utils/
-│   ├── error.utils.js
-├── .env
-├── app.js
-├── server.js
-├── package.json
 
 
 
