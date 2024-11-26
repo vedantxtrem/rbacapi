@@ -85,7 +85,8 @@ Image Upload
 | --- | --- | --- |
 | POST | /api/v1/upload/generate-presigned-url | Generate Cloudinary presigned URL. |
 
-
+# **Folder Structure**
+![RBAC Diagram](https://res.cloudinary.com/dt5akmcnd/image/upload/v1732642482/rbac/qrrzs6hqgvmpnplt0nxy.png)
 
 
 ### **Deployment**
